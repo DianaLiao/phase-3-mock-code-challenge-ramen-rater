@@ -44,9 +44,17 @@
       "name": "Peanut Butter Noodz",
       "restaurant": "Sqkrlounge",
       "image": "https://www.thewholesomedish.com/wp-content/uploads/2014/03/Sesame-Peanut-Butter-Noodles-550.jpg",
-      "rating": "9",
-      "comment": "womp",
+      "rating": "8",
+      "comment": "but why",
       "id": 6
+    },
+    {
+      "name": "Spicy peanut butter noodz",
+      "restaurant": "Sqkrlounge",
+      "image": "https://greenbowl2soul.com/wp-content/uploads/2020/02/Hot-peanut-butter-noodles.jpg",
+      "rating": "9",
+      "comment": "la la mein!",
+      "id": 7
     }
   ]
 }

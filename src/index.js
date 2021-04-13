@@ -10,10 +10,12 @@ const ramenMenu = document.querySelector("div#ramen-menu")
 const ramenForm = document.querySelector("form#ramen-rating")
 const addRamenForm = document.querySelector("form#new-ramen")
 const deleteRamenButton = document.querySelector("button#delete-ramen")
+const bestRamenButton = document.querySelector("button#best-ramen")
 
 ramenForm.addEventListener("submit", updateRamen)
 addRamenForm.addEventListener("submit", addRamen)
 deleteRamenButton.addEventListener("click", deleteRamen)
+bestRamenButton.addEventListener("click", showBestRamen)
 
 function retrieveAllRamen(){
   fetch(url).then(resp => resp.json())
@@ -113,5 +115,13 @@ function deleteRamen(event){
       alert("Ramen has been deleted!")
       retrieveAllRamen()
       displayFirstRamen()
+    })
+}
+
+function showBestRamen(){
+  fetch(url).then(resp=>resp.json())
+    .then(list =>{
+      let rankedRamen = list.sort((a,b)=>(b.rating - a.rating))
+      displaySelectedRamen(rankedRamen[0])
     })
 }
