@@ -14,6 +14,9 @@ const deleteRamenButton = document.querySelector("button#delete-ramen")
 ramenForm.addEventListener("submit", updateRamen)
 addRamenForm.addEventListener("submit", addRamen)
 deleteRamenButton.addEventListener("click", deleteRamen)
+ramenMenu.addEventListener("click", event => {
+  if (event.target.matches("img")) fetchSelectedRamen(event.target.dataset.id)
+})
 
 function retrieveAllRamen(){
   fetch(url).then(resp => resp.json())
@@ -32,8 +35,8 @@ function addRamenToMenu(ramen){
 
   ramenMenu.append(menuImg)
 
-  menuImg.addEventListener("click", _ => {
-    displaySelectedRamen(ramen)})
+  // menuImg.addEventListener("click", _ => {
+  //   displaySelectedRamen(ramen)})
 }
 
 function displayFirstRamen(){
@@ -49,9 +52,14 @@ function displaySelectedRamen(ramen){
   <h3 class="restaurant">${ramen.restaurant}</h3>`  
 
   ramenForm.rating.value = ramen.rating
-  ramenForm.comment.textContent = ramen.comment 
+  ramenForm.comment.value = ramen.comment 
   ramenForm.dataset.id = ramen.id
   deleteRamenButton.dataset.id = ramen.id
+}
+
+function fetchSelectedRamen(ramenId){
+  fetch(`${url}/${ramenId}`).then(resp => resp.json())
+    .then(displaySelectedRamen)
 }
 
 function updateRamen(event){
@@ -77,6 +85,8 @@ function updateRamen(event){
       retrieveAllRamen()
       displaySelectedRamen(ramen)
     })
+
+  ramenForm.reset()
 }
 
 function addRamen(event){
