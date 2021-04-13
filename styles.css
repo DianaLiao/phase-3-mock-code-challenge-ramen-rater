@@ -81,7 +81,7 @@ textarea {
   width: 100%;
 }
 
-input[type="submit"] {
+button, input[type="submit"] {
   color: white;
   border: 1px solid white;
   background-color: black;
@@ -89,7 +89,7 @@ input[type="submit"] {
   transition: all 0.3s;
 }
 
-input[type="submit"]:active {
+button, input[type="submit"]:active {
   background-color: gray;
 }
 
