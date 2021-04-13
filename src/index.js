@@ -46,6 +46,12 @@ function displayFirstRamen(){
 function displaySelectedRamen(ramen){
   const ramenDetail = document.querySelector("div#ramen-detail")
 
+  const imgName = ramenDetail.querySelector("h2.name")
+  const imgRestaurant = ramenDetail.querySelector("h3.restaurant")
+
+  imgName.textContent = ramen.name
+  imgRestaurant.textContent = ramen.restaurant
+
   ramenDetail.innerHTML = ` <img class="detail-image" src=${ramen.image} alt="${ramen.name}" />
   <h2 class="name">${ramen.name}</h2>
   <h3 class="restaurant">${ramen.restaurant}</h3>`  
