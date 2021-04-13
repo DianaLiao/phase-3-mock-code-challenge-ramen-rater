@@ -51,7 +51,7 @@ function displaySelectedRamen(ramen){
   <h3 class="restaurant">${ramen.restaurant}</h3>`  
 
   ramenForm.rating.value = ramen.rating
-  ramenForm.comment.textContent = ramen.comment 
+  ramenForm.comment.value = ramen.comment 
   ramenForm.dataset.id = ramen.id
   deleteRamenButton.dataset.id = ramen.id
 }
@@ -64,16 +64,16 @@ function updateRamen(event){
     comment: ramenForm.comment.value
   }
 
-  const fetchObj = {
-    method: "PATCH",
-    headers: {
-      "Content-type":"application/json",
-      "Accept":"application/json"
-    },
-    body: JSON.stringify(updatedRating)
-  }
+  // const fetchObj = {
+  //   method: "PATCH",
+  //   headers: {
+  //     "Content-type":"application/json",
+  //     "Accept":"application/json"
+  //   },
+  //   body: JSON.stringify(updatedRating)
+  // }
 
-  fetch(`${url}/${ramenForm.dataset.id}`, fetchObj)
+  fetch(`${url}/${ramenForm.dataset.id}`, fetchObj("PATCH", updatedRating))
     .then(resp => resp.json())
     .then(ramen => {
       retrieveAllRamen()
@@ -89,16 +89,16 @@ function addRamen(event){
   const image = addRamenForm.image.value
   const rating = addRamenForm.rating.value
   const comment = addRamenForm["new-comment"].value
-  const fetchObj = {
-    method: "POST",
-    headers: {
-      "Content-Type":"application/json",
-      "Accept":"application/json"
-    },
-    body: JSON.stringify({name, restaurant, image, rating, comment})
-  }
+  // const fetchObj = {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type":"application/json",
+  //     "Accept":"application/json"
+  //   },
+  //   body: JSON.stringify({name, restaurant, image, rating, comment})
+  // }
 
-  fetch(url, fetchObj).then(resp => resp.json())
+  fetch(url, fetchObj("POST",{name, restaurant, image, rating, comment})).then(resp => resp.json())
     .then(ramen => {
       addRamenToMenu(ramen)
       displaySelectedRamen(ramen)
@@ -124,4 +124,15 @@ function showBestRamen(){
       let rankedRamen = list.sort((a,b)=>(b.rating - a.rating))
       displaySelectedRamen(rankedRamen[0])
     })
+}
+
+function fetchObj(method, body){
+  return {
+    method,
+    headers: {
+      "Content-Type":"application/json",
+      "Accept":"application/json"
+    },
+    body: JSON.stringify(body)
+  }
 }
